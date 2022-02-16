@@ -1,0 +1,209 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "backend\\logs\\.53ab9a5cfcb9f2ac70dd11013c95c13d3c8dab2c-audit.json",
+    "files": [
+        {
+            "date": 1643819409820,
+            "name": "backend\\logs\\error-2022-02-02-22.log",
+            "hash": "4f986f246a213d3a42af37a355f5b7a2"
+        },
+        {
+            "date": 1643877208838,
+            "name": "backend\\logs\\error-2022-02-03-14.log",
+            "hash": "286130d79c15c1461ace08d927da650e"
+        },
+        {
+            "date": 1643882044461,
+            "name": "backend\\logs\\error-2022-02-03-15.log",
+            "hash": "faa762232ba9a9e6c38ff7c733c59015"
+        },
+        {
+            "date": 1643884347732,
+            "name": "backend\\logs\\error-2022-02-03-16.log",
+            "hash": "81126f9368c0432ebc785b528d0a4129"
+        },
+        {
+            "date": 1643888776986,
+            "name": "backend\\logs\\error-2022-02-03-17.log",
+            "hash": "a38317bae987852bd6d968d8a3784356"
+        },
+        {
+            "date": 1643891478448,
+            "name": "backend\\logs\\error-2022-02-03-18.log",
+            "hash": "a75d7e7a287979afb344c91fd31a6a88"
+        },
+        {
+            "date": 1643966839093,
+            "name": "backend\\logs\\error-2022-02-04-14.log",
+            "hash": "b1144f6a2efc0f1cbbb381280cc889cb"
+        },
+        {
+            "date": 1644137785144,
+            "name": "backend\\logs\\error-2022-02-06-14.log",
+            "hash": "0db6ba48a390cbda27bbb46bab9cb277"
+        },
+        {
+            "date": 1644231752218,
+            "name": "backend\\logs\\error-2022-02-07-16.log",
+            "hash": "17ebf6d11fb4cf7bf59f77689f5af5bf"
+        },
+        {
+            "date": 1644234098712,
+            "name": "backend\\logs\\error-2022-02-07-17.log",
+            "hash": "8e0482f6dcff0015e194aa747911699b"
+        },
+        {
+            "date": 1644248897239,
+            "name": "backend\\logs\\error-2022-02-07-21.log",
+            "hash": "5ccd45ce37d7ed33d123ef09f9b305d1"
+        },
+        {
+            "date": 1644251400944,
+            "name": "backend\\logs\\error-2022-02-07-22.log",
+            "hash": "a4c4c78e98259da270612c4b8b4f989c"
+        },
+        {
+            "date": 1644255040936,
+            "name": "backend\\logs\\error-2022-02-07-23.log",
+            "hash": "11de6113d0e74d30932d541ed3fd3b8e"
+        },
+        {
+            "date": 1644394027772,
+            "name": "backend\\logs\\error-2022-02-09-13.log",
+            "hash": "1272ab109600fb48bc0dd2b20487d12d"
+        },
+        {
+            "date": 1644423712581,
+            "name": "backend\\logs\\error-2022-02-09-21.log",
+            "hash": "580a248494f4626f9cc1556156432dea"
+        },
+        {
+            "date": 1644424223967,
+            "name": "backend\\logs\\error-2022-02-09-22.log",
+            "hash": "9ff30d2fc256b65d020060e9e74eca1b"
+        },
+        {
+            "date": 1644427827015,
+            "name": "backend\\logs\\error-2022-02-09-23.log",
+            "hash": "71201516d901f8a7ac47f7b017491962"
+        },
+        {
+            "date": 1644482386018,
+            "name": "backend\\logs\\error-2022-02-10-14.log",
+            "hash": "36beb6230cd688b008b735517e38a9d1"
+        },
+        {
+            "date": 1644485410663,
+            "name": "backend\\logs\\error-2022-02-10-15.log",
+            "hash": "0e4219531a82e1f7f23558fa6e1d3898"
+        },
+        {
+            "date": 1644489057293,
+            "name": "backend\\logs\\error-2022-02-10-16.log",
+            "hash": "03f93537925e79af1de9aa861cd83294"
+        },
+        {
+            "date": 1644509437391,
+            "name": "backend\\logs\\error-2022-02-10-21.log",
+            "hash": "308cf22f429150bfd65f86fb2a51824a"
+        },
+        {
+            "date": 1644511132544,
+            "name": "backend\\logs\\error-2022-02-10-22.log",
+            "hash": "e44400aae403f4aac68be9bfe725775a"
+        },
+        {
+            "date": 1644514534629,
+            "name": "backend\\logs\\error-2022-02-10-23.log",
+            "hash": "ef92174e3ba445da74ac5d0520ac4b00"
+        },
+        {
+            "date": 1644572260262,
+            "name": "backend\\logs\\error-2022-02-11-15.log",
+            "hash": "e730cce5f1c20f5f2ea550dbef4304e3"
+        },
+        {
+            "date": 1644653727440,
+            "name": "backend\\logs\\error-2022-02-12-13.log",
+            "hash": "d9a75d3bb1bc8c96eb051eb7a4a4d9df"
+        },
+        {
+            "date": 1644654607123,
+            "name": "backend\\logs\\error-2022-02-12-14.log",
+            "hash": "e4c89141e74371475c9df6ae2734fefa"
+        },
+        {
+            "date": 1644658439873,
+            "name": "backend\\logs\\error-2022-02-12-15.log",
+            "hash": "721add0c1ae0b333f7deeb4c601b9884"
+        },
+        {
+            "date": 1644661821471,
+            "name": "backend\\logs\\error-2022-02-12-16.log",
+            "hash": "be69a8d276ca8c0a2379c0a110e17c05"
+        },
+        {
+            "date": 1644665401607,
+            "name": "backend\\logs\\error-2022-02-12-17.log",
+            "hash": "fa5a29a9075cfef1ab50b0412ee9e575"
+        },
+        {
+            "date": 1644840447411,
+            "name": "backend\\logs\\error-2022-02-14-17.log",
+            "hash": "90851f047147d7d9a7353936d6697812"
+        },
+        {
+            "date": 1644858898766,
+            "name": "backend\\logs\\error-2022-02-14-22.log",
+            "hash": "bb2c82236106227a78fde767ba7a079e"
+        },
+        {
+            "date": 1644896222773,
+            "name": "backend\\logs\\error-2022-02-15-09.log",
+            "hash": "06ef8a3ee52f3f447d3eafe9a6ff0985"
+        },
+        {
+            "date": 1644899592514,
+            "name": "backend\\logs\\error-2022-02-15-10.log",
+            "hash": "d489e143008061fbcd46014e98af6a79"
+        },
+        {
+            "date": 1644925549792,
+            "name": "backend\\logs\\error-2022-02-15-17.log",
+            "hash": "0f2043cbf42d0e02a4f6fcad9ef9cd82"
+        },
+        {
+            "date": 1645000056844,
+            "name": "backend\\logs\\error-2022-02-16-13.log",
+            "hash": "be591f5b3ece8aa0f547ea57cfa593ae"
+        },
+        {
+            "date": 1645000930994,
+            "name": "backend\\logs\\error-2022-02-16-14.log",
+            "hash": "a902779b9b6da6ea6088d44d189b6757"
+        },
+        {
+            "date": 1645005147131,
+            "name": "backend\\logs\\error-2022-02-16-15.log",
+            "hash": "baacf8ae6fee6beee371fcd3479968df"
+        },
+        {
+            "date": 1645008103321,
+            "name": "backend\\logs\\error-2022-02-16-16.log",
+            "hash": "6b133471cf48b6510bc186044779f95d"
+        },
+        {
+            "date": 1645011399234,
+            "name": "backend\\logs\\error-2022-02-16-17.log",
+            "hash": "bbe124347b1cd5c4feb26b6054903c9b"
+        },
+        {
+            "date": 1645027633901,
+            "name": "backend\\logs\\error-2022-02-16-21.log",
+            "hash": "d5ffc686bc61c41f92fac9b09394769b"
+        }
+    ]
+}

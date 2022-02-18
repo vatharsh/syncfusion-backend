@@ -56,9 +56,8 @@ const io = new Server(server,
     pingInterval: 6000,
     pingTimeout: 30000,
     cors: {
-      origin: "http://localhost:4200",
-      methods: ["GET", "POST","PUT"],
-      credentials: true
+      origin: "process.env.prodServer",
+      methods: ["GET", "POST","PUT","PATCH", "DELETE"]
     }
 });
 

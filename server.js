@@ -56,14 +56,14 @@ const io = new Server(server,
     pingInterval: 6000,
     pingTimeout: 30000,
     cors: {
-      origin: "process.env.prodServer",
+      //origin: "process.env.server",
       methods: ["GET", "POST","PUT","PATCH", "DELETE"]
     }
 });
 
 io.on('connection', (socket) => {
-  socket.on("test event", data => {
-    socket.emit("test event", data);
+  socket.on("connected", data => {
+    socket.emit("connected", data);
   });
   //console.log('a user connected');
   global.socket = socket;

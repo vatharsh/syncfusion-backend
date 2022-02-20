@@ -53,7 +53,6 @@ function jsonReader(filePath, cb) {
       })
 }
 
-
 exports.getJsonSampleData = (req,res,next)=>{
         jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
@@ -341,6 +340,8 @@ exports.pasteRowDataTop = (req,res,next) => {
                   for(var i=0;i<rowsObj.length;i++) {
                         var dataSet = typeof(rowsObj[i].data)!="undefined" ? rowsObj[i].data.taskData : rowsObj[i].taskData;
                         counter = jsonString.key; 
+                        // console.log(dataSet);
+                        // console.log(selectedRowId);
                         if(mode =='copy') {
                               generateAndUpdateNewIds([dataSet],(index,element,obj)=>{
                                     obj[index]= element;
@@ -348,7 +349,7 @@ exports.pasteRowDataTop = (req,res,next) => {
                                     //console.log(newKey);
                               });
                         } 
-                        pasteRowTop(jsonString,selectedRowId,dataSet,jsonString.key,mode,res);
+                        pasteRowTop(jsonString,String(selectedRowId).slice(),dataSet,jsonString.key,mode,res);
                   }
                   fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
                         if (err) {
@@ -358,7 +359,7 @@ exports.pasteRowDataTop = (req,res,next) => {
                                 });
                         }
                         else {
-                             socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                              socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -600,6 +601,7 @@ function addRowChild(jsonString,selectedRowId,newRowObj,res) {
 function deleteRow(jsonString,selectedRowId,res) {
       getObjectById(jsonString.data,selectedRowId,(index,element,currArrayObj)=>{
             currArrayObj.splice(index, 1);
+            console.log('in call back');
             objFound = false;
       });
       if(res !=null) {
@@ -670,9 +672,9 @@ function pasteRowChild(jsonString,selectedRowId,newRowObj,key,mode,res) {
 
 function pasteRowTop(jsonString,selectedRowId,newRowObj,key,mode,res) {
       if(mode == 'cut') deleteRowsForCutPaste(jsonString,newRowObj.TaskID,null);
-      getObjectById(jsonString.data,selectedRowId,(index,element,currArrayObj)=>{
+      getObjectById(jsonString.data,String(selectedRowId).slice(),(index,element,currArrayObj)=>{
             currArrayObj.splice(parseInt(index),0,newRowObj);
-            objFound = false;
+            objFound=false;
       });
       jsonString.key=key;
 }
@@ -839,20 +841,26 @@ function renameJsonObjectKey(json,oldkey,newkey) {
 }
 
 function getObjectById(dataSet,id,callback) {
+      console.log(objFound+'--1');
       for(const[index,element] of Object.entries(dataSet)){
             if(objFound) break;
             if(typeof(element.subtasks)!="undefined" && element.subtasks !='' 
             && element.subtasks!=null && element.subtasks.length > 0) {
                   if(element.TaskID == id) {
                         objFound=true;
+                        console.log(objFound+'--2');
+                        console.log(element.TaskID +'--'+id+'---A');
                         callback(index,element,dataSet);
                   }
                   else {
-                    getObjectById(element.subtasks,id,callback);
+                    getObjectById(element.subtasks,String(id).slice(),callback);
                   }
+
             } else {
                   if(element.TaskID == id) {
                         objFound=true;
+                        console.log(objFound+'--3');
+                        console.log(element.TaskID +'--'+id+'---B');
                         callback(index,element,dataSet);
                   }
             }

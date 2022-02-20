@@ -918,9 +918,9 @@ function addFiftyThousandDummyRecords() {
                               "EndDate":"2017-02-06T18:30:00.000Z",
                               "Progress":100,
                               "Duration":5,
-                              "Priority":
-                              "Normal",
-                              "approved":false
+                              "Priority":"Normal",
+                              "approved":false,
+                              "subtasks":[]
                         }
                         jsonString.data.splice(parseInt(i)+1,0,obj);
                   }

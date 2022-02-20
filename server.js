@@ -57,7 +57,7 @@ const io = new Server(server,
     pingTimeout: 30000,
     cors: {
       //origin: "process.env.server",
-      methods: ["GET", "POST","PUT","PATCH", "DELETE","OPTIONS"]
+      methods: ["GET", "POST","PUT","PATCH", "DELETE"]
     }
 });
 

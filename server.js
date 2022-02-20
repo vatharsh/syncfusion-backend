@@ -65,11 +65,6 @@ io.on('connection', (socket) => {
   socket.on("connected", data => {
     socket.emit("connected", data);
   });
-  socket.on('close', function () {
-    socket.end();
-    socket.destroy();
-    console.log("socket closed");
-  });
   //console.log('a user connected');
   global.socket = socket;
 });

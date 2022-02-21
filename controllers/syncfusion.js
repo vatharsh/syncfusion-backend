@@ -176,7 +176,27 @@ exports.addHeaderColumnObject = (req,res,next)=>{
             }
             else {
                  jsonString.treegrid.headers.splice(parseInt(id)+1, 0, headerColumnObj);
-                 addNewColumnWithData(jsonString,parseInt(id),headerColumnObj,res);
+                 addNewColumnWithData(jsonString,parseInt(id),headerColumnObj,res).then(()=>{
+                  fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
+                        if (err) {
+                              console.log('Error writing file:', err)
+                              res.status(500).json({
+                                    message: err
+                              });
+                        }
+                        else {
+                              socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                              res.status(200).json({
+                                    message: "success"
+                              });
+                        }
+                  });
+                 }).catch(()=>{
+                        console.log('Error writing file:', err)
+                        res.status(500).json({
+                              message: err
+                        });
+                 });
             }
         })
 }
@@ -466,25 +486,35 @@ function deleteRowsForCutPaste(jsonString,id,res) {
       deleteRow(jsonString,id,res);
 }
 
-function addNewColumnWithData(jsonString,index,headerColumnObj,res) {
-      traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
+// function addNewColumnWithData(jsonString,index,headerColumnObj,res) {
+//       traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
+//             var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
+//             currArrayObj[i] = newObject;
+//       });
+//       fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
+//             if (err) {
+//                   console.log('Error writing file:', err)
+//                   res.status(500).json({
+//                         message: err
+//                   });
+//             }
+//             else {
+//                   socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+//                   res.status(200).json({
+//                         message: "success"
+//                   });
+//             }
+//       });
+// }
+
+const addNewColumnWithData = (jsonString,index,headerColumnObj) => {
+  return new Promise((resolve, reject) => {
+        traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
             var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
             currArrayObj[i] = newObject;
       });
-      fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
-            if (err) {
-                  console.log('Error writing file:', err)
-                  res.status(500).json({
-                        message: err
-                  });
-            }
-            else {
-                  socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
-                  res.status(200).json({
-                        message: "success"
-                  });
-            }
-      });
+    resolve(jsonString);
+  });
 }
 
 function updateNewColumnWithData(jsonString,index,headerColumnObj,oldHeaderObj,res) {

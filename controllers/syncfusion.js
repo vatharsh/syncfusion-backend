@@ -1,42 +1,44 @@
 const fs = require('fs');
+var promise = require('promise');
 const jsonData = require("../dataset/sample-data.json");
 var objFound = false;
 var counter = 0;
-const addToObject = function (obj, key, value, index) {
-
-	// Create a temp object and index variable
-	var temp = {};
-	var i = 0;
-
-	// Loop through the original object
-	for (var prop in obj) {
-		if (obj.hasOwnProperty(prop)) {
-
-			// If the indexes match, add the new item
-			if (i === index && key && value) {
-				temp[key] = value;
-			}
-
-			// Add the current item in the loop to the temp obj
-			temp[prop] = obj[prop];
-
-			// Increase the count
-			i++;
-
-		}
-	}
-
-	// If no index, add to the end
-	if (!index && key && value) {
-		temp[key] = value;
-	}
-
-	return temp;
-
-};
 
 const isDate = (date) => {
       return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+}
+
+function addToObject (obj, key, value, index) {
+      return new promise((resolve, reject) => {
+            // Create a temp object and index variable
+            var temp = {};
+            var i = 0;
+            // Loop through the original object
+            for (var prop in obj) {
+                  if (obj.hasOwnProperty(prop)) {
+
+                        // If the indexes match, add the new item
+                        if (i === index && key && value) {
+                              temp[key] = value;
+                        }
+
+                        // Add the current item in the loop to the temp obj
+                        temp[prop] = obj[prop];
+
+                        // Increase the count
+                        i++;
+
+                  }
+            }
+
+            // If no index, add to the end
+            if (!index && key && value) {
+                  temp[key] = value;
+            }
+
+            resolve(temp);
+      });
+
 }
 
 function jsonReader(filePath, cb) {
@@ -191,7 +193,7 @@ exports.addHeaderColumnObject = (req,res,next)=>{
                               });
                         }
                   });
-                 }).catch(()=>{
+                 }).catch((err)=>{
                         console.log('Error writing file:', err)
                         res.status(500).json({
                               message: err
@@ -510,8 +512,13 @@ function deleteRowsForCutPaste(jsonString,id,res) {
 const addNewColumnWithData = (jsonString,index,headerColumnObj) => {
   return new Promise((resolve, reject) => {
         traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
-            var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
-            currArrayObj[i] = newObject;
+            //var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
+            addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index).then((newObject)=>{
+                  currArrayObj[i] = newObject;
+                  console.log(newObject);
+            }).catch(()=>{
+
+            });
       });
     resolve(jsonString);
   });

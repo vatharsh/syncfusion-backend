@@ -64,7 +64,7 @@ exports.getJsonSampleData = (req,res,next)=>{
               });
             } else {
                   //addFiftyThousandDummyRecords();
-                  res.status(200).json({
+                   return res.status(200).json({
                         message: "success",
                         data : jsonString
                   });
@@ -189,7 +189,7 @@ exports.addHeaderColumnObject = (req,res,next)=>{
                         }
                         else {
                               socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
-                              res.status(200).json({
+                              return res.status(200).json({
                                     message: "success"
                               });
                         }

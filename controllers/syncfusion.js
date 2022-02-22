@@ -64,7 +64,7 @@ exports.getJsonSampleData = (req,res,next)=>{
               });
             } else {
                   //addFiftyThousandDummyRecords();
-                   return res.status(200).json({
+                   res.status(200).json({
                         message: "success",
                         data : jsonString
                   });

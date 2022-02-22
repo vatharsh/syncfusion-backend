@@ -9,35 +9,33 @@ const isDate = (date) => {
 }
 
 function addToObject (obj, key, value, index) {
-      return new promise((resolve, reject) => {
-            // Create a temp object and index variable
-            var temp = {};
-            var i = 0;
-            // Loop through the original object
-            for (var prop in obj) {
-                  if (obj.hasOwnProperty(prop)) {
+      // Create a temp object and index variable
+      var temp = {};
+      var i = 0;
+      // Loop through the original object
+      for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
 
-                        // If the indexes match, add the new item
-                        if (i === index && key && value) {
-                              temp[key] = value;
-                        }
-
-                        // Add the current item in the loop to the temp obj
-                        temp[prop] = obj[prop];
-
-                        // Increase the count
-                        i++;
-
+                  // If the indexes match, add the new item
+                  if (i === index && key && value) {
+                        temp[key] = value;
                   }
-            }
 
-            // If no index, add to the end
-            if (!index && key && value) {
-                  temp[key] = value;
+                  // Add the current item in the loop to the temp obj
+                  temp[prop] = obj[prop];
+
+                  // Increase the count
+                  i++;
+
             }
-            
-            resolve(temp);
-      });
+      }
+
+      // If no index, add to the end
+      if (!index && key && value) {
+            temp[key] = value;
+      }
+      
+      return temp;
 
 }
 
@@ -513,14 +511,9 @@ function deleteRowsForCutPaste(jsonString,id,res) {
 function addNewColumnWithData(jsonString,index,headerColumnObj) {
   return new Promise((resolve, reject) => {
         traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
-            //var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
-            addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index).then((newObject)=>{
-                  currArrayObj[i] = newObject;
-            }).catch(()=>{
-
-            });
+            var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
+            currArrayObj[i] = newObject;
       });
-      console.log('resolve promise 1');
       resolve('success');
   });
 }

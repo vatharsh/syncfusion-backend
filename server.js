@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
 
 global.io = io;
 server.on("error", onError);
-server.timeout = 30000;
+server.timeout =0;
 server.on("listening", onListening);
 server.listen(port);
 

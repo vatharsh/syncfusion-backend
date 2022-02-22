@@ -167,6 +167,7 @@ exports.removeHeaderColumnName = (req,res,next)=>{
 //end - obsolete code
 
 exports.addHeaderColumnObject = (req,res,next)=>{
+      req.connection.setTimeout(100000); 
       var id = req.body.id;
       var headerColumnObj = JSON.parse(req.body.obj);
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {

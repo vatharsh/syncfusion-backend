@@ -509,7 +509,7 @@ function deleteRowsForCutPaste(jsonString,id,res) {
 //       });
 // }
 
-const addNewColumnWithData = (jsonString,index,headerColumnObj) => {
+function addNewColumnWithData(jsonString,index,headerColumnObj) {
   return new Promise((resolve, reject) => {
         traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
             //var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);

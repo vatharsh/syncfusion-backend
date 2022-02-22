@@ -35,7 +35,7 @@ function addToObject (obj, key, value, index) {
             if (!index && key && value) {
                   temp[key] = value;
             }
-
+            
             resolve(temp);
       });
 
@@ -167,7 +167,6 @@ exports.removeHeaderColumnName = (req,res,next)=>{
 //end - obsolete code
 
 exports.addHeaderColumnObject = (req,res,next)=>{
-      req.connection.setTimeout(100000); 
       var id = req.body.id;
       var headerColumnObj = JSON.parse(req.body.obj);
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
@@ -180,6 +179,7 @@ exports.addHeaderColumnObject = (req,res,next)=>{
             else {
                  jsonString.treegrid.headers.splice(parseInt(id)+1, 0, headerColumnObj);
                  addNewColumnWithData(jsonString,parseInt(id),headerColumnObj,res).then(()=>{
+                  console.log('resolve promise 2');
                   fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
                         if (err) {
                               console.log('Error writing file:', err)
@@ -520,7 +520,8 @@ function addNewColumnWithData(jsonString,index,headerColumnObj) {
 
             });
       });
-    resolve(jsonString);
+      console.log('resolve promise 1');
+      resolve('success');
   });
 }
 

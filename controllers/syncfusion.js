@@ -515,7 +515,6 @@ function addNewColumnWithData(jsonString,index,headerColumnObj) {
             //var newObject = addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index);
             addToObject(obj,headerColumnObj.name,headerColumnObj.defaultValue,index).then((newObject)=>{
                   currArrayObj[i] = newObject;
-                  console.log(newObject);
             }).catch(()=>{
 
             });

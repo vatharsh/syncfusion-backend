@@ -214,6 +214,11 @@
             "date": 1645524144880,
             "name": "backend\\logs\\application-2022-02-22-15.log",
             "hash": "7466d4734317f1a1be23ef5a99a44957"
+        },
+        {
+            "date": 1645525802436,
+            "name": "backend\\logs\\application-2022-02-22-16.log",
+            "hash": "03348a594295d4ce956315efe390e8ad"
         }
     ]
 }

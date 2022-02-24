@@ -20,4 +20,5 @@ router.put("/pasteRowDataNext",SyncFusionController.pasteRowDataNext);
 router.put("/pasteRowDataChild",SyncFusionController.pasteRowDataChild);
 router.put("/pasteRowDataTop",SyncFusionController.pasteRowDataTop);
 router.put("/dragDropColumn",SyncFusionController.dragDropColumn);
+
 module.exports = router;

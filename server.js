@@ -53,8 +53,8 @@ const { Server } = require("socket.io");
 const io = new Server(server, 
   {
     serveClient: true,
-    pingInterval: 6000,
-    pingTimeout: 30000,
+    // pingInterval: 6000,
+    // pingTimeout: 30000,
     cors: {
       //origin: "process.env.server",
       methods: ["GET", "POST","PUT","PATCH", "DELETE"]

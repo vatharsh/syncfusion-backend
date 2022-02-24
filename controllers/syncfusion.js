@@ -481,6 +481,48 @@ exports.pasteRowDataChild = (req,res,next) => {
       
 }
 
+exports.dragDropColumn=(req,res,next)=>{
+      var columnCurrIndex = req.body.columnCurrIndex;
+      var columnObj = req.body.columnObj;
+      var targetIndex = req.body.targetIndex;
+      jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
+            if (err) {
+                console.log(err)
+                res.status(500).json({
+                  message: err
+              });
+            }
+            else {
+                  //below add the header column to the drop index
+                  if(parseInt(targetIndex) > parseInt(columnCurrIndex)) {
+                        jsonString.treegrid.headers.splice(parseInt(targetIndex)+1, 0, columnObj);
+                        //below removes the header column from current index
+                        jsonString.treegrid.headers.splice(columnCurrIndex, 1);
+                  }
+                  else {
+                        jsonString.treegrid.headers.splice(parseInt(targetIndex), 0, columnObj);
+                        //below removes the header column from current index
+                        jsonString.treegrid.headers.splice(parseInt(columnCurrIndex)+1, 1);
+                  }
+                  
+                  fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
+                        if (err) {
+                              console.log('Error writing file:', err)
+                              res.status(500).json({
+                                    message: err
+                                });
+                        }
+                        else {
+                             socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                              res.status(200).json({
+                                    message: "success"
+                              });
+                        }
+                    });
+            }
+      });
+}
+
 function deleteRowsForCutPaste(jsonString,id,res) {
       deleteRow(jsonString,id,res);
 }
@@ -863,15 +905,15 @@ function renameJsonObjectKey(json,oldkey,newkey) {
 }
 
 function getObjectById(dataSet,id,callback) {
-      console.log(objFound+'--1');
+      //console.log(objFound+'--1');
       for(const[index,element] of Object.entries(dataSet)){
             if(objFound) break;
             if(typeof(element.subtasks)!="undefined" && element.subtasks !='' 
             && element.subtasks!=null && element.subtasks.length > 0) {
                   if(element.TaskID == id) {
                         objFound=true;
-                        console.log(objFound+'--2');
-                        console.log(element.TaskID +'--'+id+'---A');
+                        // console.log(objFound+'--2');
+                        // console.log(element.TaskID +'--'+id+'---A');
                         callback(index,element,dataSet);
                   }
                   else {
@@ -881,8 +923,8 @@ function getObjectById(dataSet,id,callback) {
             } else {
                   if(element.TaskID == id) {
                         objFound=true;
-                        console.log(objFound+'--3');
-                        console.log(element.TaskID +'--'+id+'---B');
+                        // console.log(objFound+'--3');
+                        // console.log(element.TaskID +'--'+id+'---B');
                         callback(index,element,dataSet);
                   }
             }

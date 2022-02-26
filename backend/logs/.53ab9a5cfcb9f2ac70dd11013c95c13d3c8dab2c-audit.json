@@ -6,41 +6,6 @@
     "auditLog": "backend\\logs\\.53ab9a5cfcb9f2ac70dd11013c95c13d3c8dab2c-audit.json",
     "files": [
         {
-            "date": 1644482386018,
-            "name": "backend\\logs\\error-2022-02-10-14.log",
-            "hash": "36beb6230cd688b008b735517e38a9d1"
-        },
-        {
-            "date": 1644485410663,
-            "name": "backend\\logs\\error-2022-02-10-15.log",
-            "hash": "0e4219531a82e1f7f23558fa6e1d3898"
-        },
-        {
-            "date": 1644489057293,
-            "name": "backend\\logs\\error-2022-02-10-16.log",
-            "hash": "03f93537925e79af1de9aa861cd83294"
-        },
-        {
-            "date": 1644509437391,
-            "name": "backend\\logs\\error-2022-02-10-21.log",
-            "hash": "308cf22f429150bfd65f86fb2a51824a"
-        },
-        {
-            "date": 1644511132544,
-            "name": "backend\\logs\\error-2022-02-10-22.log",
-            "hash": "e44400aae403f4aac68be9bfe725775a"
-        },
-        {
-            "date": 1644514534629,
-            "name": "backend\\logs\\error-2022-02-10-23.log",
-            "hash": "ef92174e3ba445da74ac5d0520ac4b00"
-        },
-        {
-            "date": 1644572260262,
-            "name": "backend\\logs\\error-2022-02-11-15.log",
-            "hash": "e730cce5f1c20f5f2ea550dbef4304e3"
-        },
-        {
             "date": 1644653727440,
             "name": "backend\\logs\\error-2022-02-12-13.log",
             "hash": "d9a75d3bb1bc8c96eb051eb7a4a4d9df"
@@ -224,6 +189,16 @@
             "date": 1645679510677,
             "name": "backend\\logs\\error-2022-02-24-10.log",
             "hash": "0e0abc8ae6d5cbc4cd4ce9085a5bf441"
+        },
+        {
+            "date": 1645714669743,
+            "name": "backend\\logs\\error-2022-02-24-20.log",
+            "hash": "11c0ca60d428822f34d99695f4487330"
+        },
+        {
+            "date": 1645791151517,
+            "name": "backend\\logs\\error-2022-02-25-17.log",
+            "hash": "350151f233f2b7d4f689d1f161777c2a"
         }
     ]
 }

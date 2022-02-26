@@ -6,41 +6,6 @@
     "auditLog": "backend\\logs\\.c9de0f120d0538ab10473cd10ce5979ce9b2b3bd-audit.json",
     "files": [
         {
-            "date": 1644482385875,
-            "name": "backend\\logs\\application-2022-02-10-14.log",
-            "hash": "328ef2525fc174b7831b5c0925f0c557"
-        },
-        {
-            "date": 1644485410609,
-            "name": "backend\\logs\\application-2022-02-10-15.log",
-            "hash": "f23ed89f15b29c956d0f31f185ac870b"
-        },
-        {
-            "date": 1644489057260,
-            "name": "backend\\logs\\application-2022-02-10-16.log",
-            "hash": "af35b58688309d2bcbdca8f8dd1e4c9c"
-        },
-        {
-            "date": 1644509437179,
-            "name": "backend\\logs\\application-2022-02-10-21.log",
-            "hash": "35aed0a79b76ded30bb1eef836d215eb"
-        },
-        {
-            "date": 1644511132498,
-            "name": "backend\\logs\\application-2022-02-10-22.log",
-            "hash": "507c10018da1e0de3f8868d7f707ef8d"
-        },
-        {
-            "date": 1644514534619,
-            "name": "backend\\logs\\application-2022-02-10-23.log",
-            "hash": "c00deda49a88fd48b194bb4a30a10e2e"
-        },
-        {
-            "date": 1644572260177,
-            "name": "backend\\logs\\application-2022-02-11-15.log",
-            "hash": "67a0c020c5d5fec2b99ee4413b6921b2"
-        },
-        {
             "date": 1644653727226,
             "name": "backend\\logs\\application-2022-02-12-13.log",
             "hash": "e92283572c68afec032e721c6bc53e32"
@@ -224,6 +189,16 @@
             "date": 1645679510601,
             "name": "backend\\logs\\application-2022-02-24-10.log",
             "hash": "c54a1a2f84805eb2f6fcd3d55a4caf5a"
+        },
+        {
+            "date": 1645714669621,
+            "name": "backend\\logs\\application-2022-02-24-20.log",
+            "hash": "cfe595a27b69fd2fd0aa3ce0b1842e89"
+        },
+        {
+            "date": 1645791151328,
+            "name": "backend\\logs\\application-2022-02-25-17.log",
+            "hash": "a2c3e52a7795bbc5cccccc8b03352994"
         }
     ]
 }

@@ -291,8 +291,8 @@ exports.addRowChild = (req,res,next) => {
 }
 
 exports.deleteRow= (req,res,next) => {
-      var selectedRowObject = req.body.selectedRowObj;
-      var selectedRowId = selectedRowObject.data.TaskID;
+      var selectedRowObjects = req.body.selectedRowObjs;
+      //var selectedRowId = selectedRowObject.data.TaskID;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
                 console.log(err)
@@ -301,7 +301,26 @@ exports.deleteRow= (req,res,next) => {
               });
             }
             else {
-                  deleteRow(jsonString,selectedRowId,res);
+                  selectedRowObjects.forEach(element => {
+                        //console.log(element.data.TaskID);
+                        var selectedRowId = element.data.TaskID;
+                        deleteRow(jsonString,selectedRowId,null);
+                  });
+                  fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
+                        if (err) {
+                              console.log('Error writing file:', err)
+                              res.status(500).json({
+                                    message: err
+                              });
+                        }
+                        else {
+                        socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                              res.status(200).json({
+                                    message: "success"
+                              });
+                        }
+                  });
+                  //deleteRow(jsonString,selectedRowId,res);
             }
       });
       
@@ -552,9 +571,9 @@ function updateNewColumnWithData(jsonString,index,headerColumnObj,oldHeaderObj,r
       traverseRootAndAllChild(jsonString.data,(i,obj,currArrayObj)=>{
             var colName = headerColumnObj.name;
             var oldName = oldHeaderObj.name;
-            
+            // console.log(headerColumnObj.defaultValue);
             if(obj.hasOwnProperty(oldName))
-            obj[oldName] = convertDataToDataType(obj[oldName],headerColumnObj.dataType,
+              obj[oldName] = convertDataToDataType(obj[oldName],headerColumnObj.dataType,
                         headerColumnObj.defaultValue);
             currArrayObj[i] = renameJsonObjectKey(obj,oldName,colName);
             
@@ -662,7 +681,7 @@ function addRowChild(jsonString,selectedRowId,newRowObj,res) {
 function deleteRow(jsonString,selectedRowId,res) {
       getObjectById(jsonString.data,selectedRowId,(index,element,currArrayObj)=>{
             currArrayObj.splice(index, 1);
-            console.log('in call back');
+            //console.log('in call back');
             objFound = false;
       });
       if(res !=null) {
@@ -852,10 +871,11 @@ function convertDataToDataType(data,dataType,defaultValue) {
             case 'Text' :
                   try {
                         safeValue = String(data);
-                        if(typeof(safeValue)!='undefined' && safeValue != 'NaN'
-                         && safeValue != null && safeValue !='') {
-                              safeValue = data;
+                        if(typeof(safeValue)=='undefined' || safeValue == null || 
+                        safeValue =='' || !isNaN(safeValue)) {
+                              safeValue = defaultValue;
                         }
+                        else safeValue = data;
                   } catch (e) {
                         safeValue = defaultValue;
                   }
@@ -863,11 +883,11 @@ function convertDataToDataType(data,dataType,defaultValue) {
             case 'Num' :
                   try {
                         safeValue = parseFloat(data);
-                        if(typeof(safeValue)!='undefined' && safeValue != 'NaN'
-                         && safeValue != null && safeValue !='') {
-                              safeValue = data;
+                        if(typeof(safeValue)=='undefined' || isNaN(safeValue)
+                         || safeValue == null || safeValue =='') {
+                              safeValue = defaultValue;
                         }
-                        else safeValue = defaultValue;
+                        else safeValue = data;
                   } catch (e) {
                         safeValue = defaultValue;
                   }
@@ -883,12 +903,18 @@ function convertDataToDataType(data,dataType,defaultValue) {
                   }
                   break; 
             case 'Boolean' :
-                  data = String(data);
-                  if(typeof(data)!='undefined' && data != null 
-                        && data !='' && (data.toLowerCase() == 'true' || data.toLowerCase() == 'false')) {
-                              safeValue = data;
-                  }
-                  else safeValue = defaultValue;
+                  // data = String(data);
+                  // if(typeof(data)!='undefined' && data != null 
+                  //       && data !='' && (data.toLowerCase() == 'true' || data.toLowerCase() == 'false')) {
+                  //             safeValue = data;
+                  // }
+                  // else safeValue = defaultValue;
+
+                  if(typeof(data) != "boolean") {
+                              safeValue = defaultValue;
+                        }
+                        else safeValue = data;
+
                   break;
             default :
                   safeValue = defaultValue;    

@@ -6,31 +6,6 @@
     "auditLog": "backend\\logs\\.c9de0f120d0538ab10473cd10ce5979ce9b2b3bd-audit.json",
     "files": [
         {
-            "date": 1644653727226,
-            "name": "backend\\logs\\application-2022-02-12-13.log",
-            "hash": "e92283572c68afec032e721c6bc53e32"
-        },
-        {
-            "date": 1644654607021,
-            "name": "backend\\logs\\application-2022-02-12-14.log",
-            "hash": "6448658cd0438a8d7c6b842c2a409012"
-        },
-        {
-            "date": 1644658439826,
-            "name": "backend\\logs\\application-2022-02-12-15.log",
-            "hash": "7469bb975914ba02de38e89e0968005a"
-        },
-        {
-            "date": 1644661821375,
-            "name": "backend\\logs\\application-2022-02-12-16.log",
-            "hash": "732ce53751b0e9aac7df29a862018a0a"
-        },
-        {
-            "date": 1644665401598,
-            "name": "backend\\logs\\application-2022-02-12-17.log",
-            "hash": "675b831b5cfacd5a8b11f9f95633eb99"
-        },
-        {
             "date": 1644840447335,
             "name": "backend\\logs\\application-2022-02-14-17.log",
             "hash": "14de8751731e140d638dee482b55ecc0"
@@ -199,6 +174,21 @@
             "date": 1645791151328,
             "name": "backend\\logs\\application-2022-02-25-17.log",
             "hash": "a2c3e52a7795bbc5cccccc8b03352994"
+        },
+        {
+            "date": 1646037365752,
+            "name": "backend\\logs\\application-2022-02-28-14.log",
+            "hash": "5376d804a29768596d3ed623111db235"
+        },
+        {
+            "date": 1646043297655,
+            "name": "backend\\logs\\application-2022-02-28-15.log",
+            "hash": "c0c0e00dca12c97de61f9c8ae6d4dc88"
+        },
+        {
+            "date": 1646044237670,
+            "name": "backend\\logs\\application-2022-02-28-16.log",
+            "hash": "31ea8942018d1ff9c6d108910965a806"
         }
     ]
 }

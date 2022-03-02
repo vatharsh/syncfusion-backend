@@ -422,7 +422,7 @@ exports.pasteRowDataNext = (req,res,next) => {
             }
             else {
                   //addRowNext(jsonString,selectedRowId,newRowObj,res);
-                  console.log(rowsObj.length);
+                  //console.log(rowsObj.length);
                   for(var i=0;i<rowsObj.length;i++) {
                         var dataSet = typeof(rowsObj[i].data)!="undefined" ? rowsObj[i].data.taskData : rowsObj[i].taskData;
                         counter = jsonString.key; 

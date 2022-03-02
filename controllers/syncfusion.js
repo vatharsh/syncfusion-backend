@@ -302,8 +302,8 @@ exports.deleteRow= (req,res,next) => {
             }
             else {
                   selectedRowObjects.forEach(element => {
-                        //console.log(element.data.TaskID);
-                        var selectedRowId = element.data.TaskID;
+                        //console.log(element.row);
+                        var selectedRowId = element.row.TaskID;
                         deleteRow(jsonString,selectedRowId,null);
                   });
                   fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {

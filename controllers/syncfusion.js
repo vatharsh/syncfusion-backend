@@ -337,26 +337,7 @@ exports.updateRow = (req,res,next) => {
               });
             }
             else {
-                  updateRow(jsonString,modifiedRowId,modifyRowObj,res).then((data)=>{
-                        fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
-                              if (err) {
-                                    console.log('Error writing file:', err)
-                                    res.status(500).json({
-                                          message: err
-                                      });
-                              }
-                              else {
-                                   socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
-                                    res.status(200).json({
-                                          message: "success"
-                                    });
-                              }
-                          });
-                  }).catch(()=>{
-                        res.status(500).json({
-                              message: err
-                          });
-                  });
+                  updateRow(jsonString,modifiedRowId,modifyRowObj,res);
             }
       });
       
@@ -703,29 +684,27 @@ function deleteRow(jsonString,selectedRowId,res) {
 }
 
 function updateRow(jsonString,modifiedRowId,modifyRowObj,res) {
-      return new Promise((resolve, reject) => {
-            getObjectById(jsonString.data,modifiedRowId,(index,element,currArrayObj)=>{
-                  modifyRowObj = Object.assign({TaskID: modifiedRowId}, modifyRowObj);
-                  traverseObjectAndCheckDataIntegrityToDataType(modifyRowObj,jsonString.treegrid.headers);
-                  currArrayObj[index] = modifyRowObj;
-                  objFound = false;
-            });
-            resolve(true);
+      getObjectById(jsonString.data,modifiedRowId,(index,element,currArrayObj)=>{
+            modifyRowObj = Object.assign({TaskID: modifiedRowId}, modifyRowObj);
+            //console.log(modifyRowObj);
+            traverseObjectAndCheckDataIntegrityToDataType(modifyRowObj,jsonString.treegrid.headers);
+            currArrayObj[index] = modifyRowObj;
+            objFound = false;
       });
-      // fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
-      //       if (err) {
-      //             console.log('Error writing file:', err)
-      //             res.status(500).json({
-      //                   message: err
-      //               });
-      //       }
-      //       else {
-      //            socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
-      //             res.status(200).json({
-      //                   message: "success"
-      //             });
-      //       }
-      //   });
+      fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
+            if (err) {
+                  console.log('Error writing file:', err)
+                  res.status(500).json({
+                        message: err
+                    });
+            }
+            else {
+                 socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                  res.status(200).json({
+                        message: "success"
+                  });
+            }
+        });
 }
 
 function pasteRowNext(jsonString,selectedRowId,newRowObj,key,mode,res) {

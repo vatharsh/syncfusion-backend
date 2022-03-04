@@ -165,6 +165,8 @@ exports.removeHeaderColumnName = (req,res,next)=>{
 //end - obsolete code
 
 exports.addHeaderColumnObject = (req,res,next)=>{
+      try {
+      
       var id = req.body.id;
       var headerColumnObj = JSON.parse(req.body.obj);
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
@@ -178,10 +180,18 @@ exports.addHeaderColumnObject = (req,res,next)=>{
                  jsonString.treegrid.headers.splice(parseInt(id)+1, 0, headerColumnObj);
                  addNewColumnWithData(jsonString,parseInt(id),headerColumnObj,res);
             }
-        })
+        });
+              
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+              });
+      }
 }
 
 exports.updateHeaderColumnObject = (req,res,next)=>{
+      try {
+      
       var id = req.body.id;
       var headerColumnObj = JSON.parse(req.body.obj);
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
@@ -196,11 +206,17 @@ exports.updateHeaderColumnObject = (req,res,next)=>{
                  jsonString.treegrid.headers[id] = headerColumnObj;
                  updateNewColumnWithData(jsonString,parseInt(id),headerColumnObj,oldHeaderObj,res);
             }
-        })
+        });
+              
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+              });
+      }
 }
 
 exports.removeHeaderColumnObject = (req,res,next)=>{
-      //console.log(req.body);
+      try {
       var id = req.body.id;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
@@ -215,10 +231,17 @@ exports.removeHeaderColumnObject = (req,res,next)=>{
               removeColumnWithData(jsonString,id,colName,res);
               
             }
-        })
+        });
+             
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+              });
+      }
 }
 
 exports.dragDropRows= (req,res,next)=>{
+ try {
       var dragDropEventObj = req.body.dragDropEvent;
       var dragDropEventObjData = dragDropEventObj.dragDropEventObjData;
       var dropIndex= dragDropEventObj.dropIndex ;
@@ -248,10 +271,16 @@ exports.dragDropRows= (req,res,next)=>{
                   });
             }
       });
-      
+          
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.addRowNext = (req,res,next) => {
+      try {
       // console.log(req.body);
       //var addRowEventObj = req.body.addRowEvent;
       var newRowObj = req.body.newRowObj;
@@ -269,10 +298,17 @@ exports.addRowNext = (req,res,next) => {
                   addRowNext(jsonString,selectedRowId,newRowObj,res);
             }
       });
-      
+         
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.addRowChild = (req,res,next) => {
+      try {
+         
       var newRowObj = req.body.newRowObj;
       var selectedRowObject = req.body.selectedRowObj;
       var selectedRowId = selectedRowObject.data.TaskID;
@@ -287,10 +323,16 @@ exports.addRowChild = (req,res,next) => {
                   addRowChild(jsonString,selectedRowId,newRowObj,res);
             }
       });
-      
+         
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.deleteRow= (req,res,next) => {
+      try {
       var selectedRowObjects = req.body.selectedRowObjs;
       //var selectedRowId = selectedRowObject.data.TaskID;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
@@ -323,10 +365,16 @@ exports.deleteRow= (req,res,next) => {
                   //deleteRow(jsonString,selectedRowId,res);
             }
       });
-      
+          
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.updateRow = (req,res,next) => {
+      try {
       var modifyRowObj = req.body.modifyRowObj;
       var modifiedRowId = req.body.taskId;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
@@ -340,11 +388,16 @@ exports.updateRow = (req,res,next) => {
                   updateRow(jsonString,modifiedRowId,modifyRowObj,res);
             }
       });
-      
+           
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.pasteRowDataTop = (req,res,next) => {
-      // console.log(req.body);
+ try {
       var rowsObj = req.body.rowsObj;
       var selectedRowId = req.body.taskId;
       var mode = req.body.mode;
@@ -386,10 +439,16 @@ exports.pasteRowDataTop = (req,res,next) => {
                     });
             }
       });
-      
+           
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.pasteRowDataNext = (req,res,next) => {
+      try {
       // console.log(req.body);
       var rowsObj = req.body.rowsObj;
       var selectedRowId = req.body.taskId;
@@ -432,10 +491,16 @@ exports.pasteRowDataNext = (req,res,next) => {
                     });
             }
       });
-      
+           
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.pasteRowDataChild = (req,res,next) => {
+      try {
       // console.log(req.body);
       var rowsObj = req.body.rowsObj;
       var selectedRowId = req.body.taskId;
@@ -478,10 +543,16 @@ exports.pasteRowDataChild = (req,res,next) => {
                     });
             }
       });
-      
+          
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 exports.dragDropColumn=(req,res,next)=>{
+  try {
       var columnCurrIndex = req.body.columnCurrIndex;
       var columnObj = req.body.columnObj;
       var targetIndex = req.body.targetIndex;
@@ -521,6 +592,12 @@ exports.dragDropColumn=(req,res,next)=>{
                     });
             }
       });
+           
+      } catch (err) {
+            res.status(500).json({
+                  message: err
+            });
+      }
 }
 
 function deleteRowsForCutPaste(jsonString,id,res) {

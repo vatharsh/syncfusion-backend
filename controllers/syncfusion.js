@@ -286,7 +286,7 @@ exports.addRowNext = (req,res,next) => {
       var newRowObj = req.body.newRowObj;
       var selectedRowObject = req.body.selectedRowObj;
       // console.log(selectedRowObject);
-      var selectedRowId = selectedRowObject.data.TaskID;
+      var selectedRowId = selectedRowObject.TaskID;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
                 console.log(err)
@@ -311,7 +311,7 @@ exports.addRowChild = (req,res,next) => {
          
       var newRowObj = req.body.newRowObj;
       var selectedRowObject = req.body.selectedRowObj;
-      var selectedRowId = selectedRowObject.data.TaskID;
+      var selectedRowId = selectedRowObject.TaskID;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
                 console.log(err)

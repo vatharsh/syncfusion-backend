@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { Socket } = require("../utils/socket"); 
 var promise = require('promise');
 const jsonData = require("../dataset/sample-data.json");
 var objFound = false;
@@ -356,7 +357,7 @@ exports.deleteRow= (req,res,next) => {
                               });
                         }
                         else {
-                        socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                        Socket.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -431,7 +432,7 @@ exports.pasteRowDataTop = (req,res,next) => {
                                 });
                         }
                         else {
-                              socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                              Socket.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -483,7 +484,7 @@ exports.pasteRowDataNext = (req,res,next) => {
                                 });
                         }
                         else {
-                             socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                             Socket.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -535,7 +536,7 @@ exports.pasteRowDataChild = (req,res,next) => {
                                 });
                         }
                         else {
-                             socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                             Socket.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -584,7 +585,7 @@ exports.dragDropColumn=(req,res,next)=>{
                                 });
                         }
                         else {
-                             socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                             Socket.emit("TreeGrid data modified","CODE:x000SX1");
                               res.status(200).json({
                                     message: "success"
                               });
@@ -617,7 +618,7 @@ function addNewColumnWithData(jsonString,index,headerColumnObj,res) {
                   });
             }
             else {
-                  socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                  Socket.emit("TreeGrid data modified","CODE:x000SX1");
                   res.status(200).json({
                         message: "success"
                   });
@@ -644,8 +645,9 @@ function updateNewColumnWithData(jsonString,index,headerColumnObj,oldHeaderObj,r
                   });
             }
             else {
-                  //io.emit("TreeGrid data modified","CODE:x000SX1");
-                  socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                  //Socket.emit("TreeGrid data modified","CODE:x000SX1");
+                  //socket.emit("TreeGrid data modified","CODE:x000SX1");
+                  Socket.emit("TreeGrid data modified","CODE:x000SX1");
                   res.status(200).json({
                         message: "success"
                   });
@@ -668,7 +670,7 @@ function removeColumnWithData(jsonString,index,colName,res) {
                      });
              }
              else {
-                  socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                  Socket.emit("TreeGrid data modified","CODE:x000SX1");
                    res.status(200).json({
                          message: "success"
                    });
@@ -693,7 +695,7 @@ function addRowNext(jsonString,selectedRowId,newRowObj,res) {
                     });
             }
             else {
-                 socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                 Socket.emit("TreeGrid data modified","CODE:x000SX1");
                   res.status(200).json({
                         message: "success"
                   });
@@ -727,7 +729,7 @@ function addRowChild(jsonString,selectedRowId,newRowObj,res) {
                     });
             }
             else {
-                 socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                 Socket.emit("TreeGrid data modified","CODE:x000SX1");
                   res.status(200).json({
                         message: "success"
                   });
@@ -751,7 +753,7 @@ function deleteRow(jsonString,selectedRowId,res) {
                         });
                   }
                   else {
-                  socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                  Socket.emit("TreeGrid data modified","CODE:x000SX1");
                         res.status(200).json({
                               message: "success"
                         });
@@ -776,7 +778,7 @@ function updateRow(jsonString,modifiedRowId,modifyRowObj,res) {
                     });
             }
             else {
-                 socket.broadcast.emit("TreeGrid data modified","CODE:x000SX1");
+                 Socket.emit("TreeGrid data modified","CODE:x000SX1");
                   res.status(200).json({
                         message: "success"
                   });

@@ -48,32 +48,36 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
+const { io } = require("./utils/socket");
+io.attach(server);
+// const { Server } = require("socket.io");
+// const io = new Server(server, 
+//   {
+//     serveClient: true,
+//     pingInterval: 6000,
+//     pingTimeout: 30000,
+//     cors: {
+//       //origin: "process.env.server",
+//       methods: ["GET", "POST","PUT","PATCH", "DELETE"]
+//     }
+// });
 
-const { Server } = require("socket.io");
-const io = new Server(server, 
-  {
-    serveClient: true,
-    // pingInterval: 6000,
-    // pingTimeout: 30000,
-    cors: {
-      //origin: "process.env.server",
-      methods: ["GET", "POST","PUT","PATCH", "DELETE"]
-    }
-});
+// io.on('connection', (socket) => {
+//   console.log('user is connected');
+//   socket.on("connected", data => {
+//     socket.emit("connected", data);
+//   });
 
-io.on('connection', (socket) => {
-  socket.on("connected", data => {
-    socket.emit("connected", data);
-  });
-  //console.log('a user connected');
-  global.socket = socket;
-});
+//   //console.log('a user connected');
+//   global.socket = socket;
+// });
 
-global.io = io;
+// global.io = io;
+
 server.on("error", onError);
 server.on("listening", onListening);
 server.on('connection', function(socket) {
-  socket.setTimeout(100000);
+  //socket.setTimeout(100000);
 })
 server.listen(port);
 

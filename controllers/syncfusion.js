@@ -286,7 +286,6 @@ exports.addRowNext = (req,res,next) => {
       //var addRowEventObj = req.body.addRowEvent;
       var newRowObj = req.body.newRowObj;
       var selectedRowObject = req.body.selectedRowObj;
-      // console.log(selectedRowObject);
       var selectedRowId = selectedRowObject.TaskID;
       jsonReader(__dirname + '/../dataset/sample-data.json', (err, jsonString) => {
             if (err) {
@@ -681,8 +680,8 @@ function removeColumnWithData(jsonString,index,colName,res) {
 function addRowNext(jsonString,selectedRowId,newRowObj,res) {
       getObjectById(jsonString.data,selectedRowId,(index,element,currArrayObj)=>{
             var currentKey = jsonString.key;
-            newRowObj = Object.assign({TaskID: parseInt(currentKey)+1}, newRowObj);
             traverseObjectAndCheckDataIntegrityToDataType(newRowObj,jsonString.treegrid.headers);
+            newRowObj = Object.assign({TaskID: parseInt(currentKey)+1}, newRowObj);
             currArrayObj.splice(parseInt(index)+1,0,newRowObj);
             jsonString.key = parseInt(currentKey)+1;
             objFound = false;
@@ -707,9 +706,8 @@ function addRowNext(jsonString,selectedRowId,newRowObj,res) {
 function addRowChild(jsonString,selectedRowId,newRowObj,res) {
       getObjectById(jsonString.data,selectedRowId,(index,element,currArrayObj)=>{
             var currentKey = jsonString.key;
-            newRowObj = Object.assign({TaskID: parseInt(currentKey)+1}, newRowObj);
             traverseObjectAndCheckDataIntegrityToDataType(newRowObj,jsonString.treegrid.headers);
-
+            newRowObj = Object.assign({TaskID: parseInt(currentKey)+1}, newRowObj);
             if(typeof(element.subtasks)!="undefined" && element.subtasks !=null 
             && element.subtasks!=''){
                   element.subtasks.push(newRowObj);
@@ -974,6 +972,9 @@ function convertDataToDataType(data,dataType,defaultValue) {
                         else safeValue = data;
 
                   break;
+            case 'DropDownList' :
+                  safeValue = data;
+            break;
             default :
                   safeValue = defaultValue;    
       }

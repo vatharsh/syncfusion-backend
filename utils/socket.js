@@ -12,7 +12,7 @@ var Socket = {
 };
 
 io.on("connection", function (socket) {
-    console.log("A user connected");
+    //console.log("A user connected");
 });
 
 exports.Socket = Socket;

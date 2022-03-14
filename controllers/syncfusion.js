@@ -762,10 +762,14 @@ function deleteRow(jsonString,selectedRowId,res) {
 
 function updateRow(jsonString,modifiedRowId,modifyRowObj,res) {
       getObjectById(jsonString.data,modifiedRowId,(index,element,currArrayObj)=>{
-            modifyRowObj = Object.assign({TaskID: modifiedRowId}, modifyRowObj);
+            //modifyRowObj = Object.assign({TaskID: modifiedRowId}, modifyRowObj);
             //console.log(modifyRowObj);
-            traverseObjectAndCheckDataIntegrityToDataType(modifyRowObj,jsonString.treegrid.headers);
-            currArrayObj[index] = modifyRowObj;
+            //console.log(currArrayObj[index]);
+            //traverseObjectAndCheckDataIntegrityToDataType(modifyRowObj,jsonString.treegrid.headers);
+            var newModifiedObj = updateModifyRowObj(modifyRowObj,currArrayObj[index],jsonString.treegrid.headers,modifiedRowId)
+            //currArrayObj[index] = modifyRowObj;
+            currArrayObj[index] =newModifiedObj;
+            console.log(currArrayObj[index]);
             objFound = false;
       });
       fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
@@ -782,6 +786,19 @@ function updateRow(jsonString,modifiedRowId,modifyRowObj,res) {
                   });
             }
         });
+}
+
+function updateModifyRowObj(modifyRowObj,currArrayObj,headers,modifiedRowId) {
+      for (var prop in modifyRowObj) {
+            if (modifyRowObj.hasOwnProperty(prop)) {
+                  var headerObj = headers.find((o)=>o.name==prop);
+                  if(typeof(headerObj)!="undefined" && headerObj!=null && headerObj !='' &&  headerObj.name !='TaskID') {
+                        var val = convertDataToDataType(modifyRowObj[prop],headerObj.dataType,headerObj.defaultValue);
+                        currArrayObj[prop] = val;
+                  }
+            }
+        }
+        return currArrayObj;
 }
 
 function pasteRowNext(jsonString,selectedRowId,newRowObj,key,mode,res) {

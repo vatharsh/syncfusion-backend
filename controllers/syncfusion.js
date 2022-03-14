@@ -769,7 +769,7 @@ function updateRow(jsonString,modifiedRowId,modifyRowObj,res) {
             var newModifiedObj = updateModifyRowObj(modifyRowObj,currArrayObj[index],jsonString.treegrid.headers,modifiedRowId)
             //currArrayObj[index] = modifyRowObj;
             currArrayObj[index] =newModifiedObj;
-            console.log(currArrayObj[index]);
+            //console.log(currArrayObj[index]);
             objFound = false;
       });
       fs.writeFile(__dirname + '/../dataset/sample-data.json', JSON.stringify(jsonString), (err) => {
@@ -794,10 +794,12 @@ function updateModifyRowObj(modifyRowObj,currArrayObj,headers,modifiedRowId) {
                   var headerObj = headers.find((o)=>o.name==prop);
                   if(typeof(headerObj)!="undefined" && headerObj!=null && headerObj !='' &&  headerObj.name !='TaskID') {
                         var val = convertDataToDataType(modifyRowObj[prop],headerObj.dataType,headerObj.defaultValue);
+                        console.log(prop+'--'+val)
                         currArrayObj[prop] = val;
                   }
             }
         }
+        console.log(currArrayObj);
         return currArrayObj;
 }
 
@@ -953,14 +955,14 @@ function convertDataToDataType(data,dataType,defaultValue) {
                         safeValue = defaultValue;
                   }
                   break;
-            case 'Num' :
+            case 'Num' :      
                   try {
                         safeValue = parseFloat(data);
                         if(typeof(safeValue)=='undefined' || isNaN(safeValue)
                          || safeValue == null || safeValue =='') {
                               safeValue = defaultValue;
                         }
-                        else safeValue = data;
+                        else safeValue = parseFloat(data);
                   } catch (e) {
                         safeValue = defaultValue;
                   }

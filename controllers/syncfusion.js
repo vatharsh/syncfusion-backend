@@ -793,13 +793,13 @@ function updateModifyRowObj(modifyRowObj,currArrayObj,headers,modifiedRowId) {
             if (modifyRowObj.hasOwnProperty(prop)) {
                   var headerObj = headers.find((o)=>o.name==prop);
                   if(typeof(headerObj)!="undefined" && headerObj!=null && headerObj !='' &&  headerObj.name !='TaskID') {
-                        var val = convertDataToDataType(modifyRowObj[prop],headerObj.dataType,headerObj.defaultValue);
-                        console.log(prop+'--'+val)
+                        var val = convertDataToDataType(modifyRowObj[prop],headerObj.dataType,headerObj.defaultValue,true);
+                        //console.log(prop+'--'+val)
                         currArrayObj[prop] = val;
                   }
             }
         }
-        console.log(currArrayObj);
+        //console.log(currArrayObj);
         return currArrayObj;
 }
 
@@ -940,7 +940,7 @@ function removeDragDropRowDataOnceMoved(dataSet,dragDropEventObjData) {
       }
 }
 
-function convertDataToDataType(data,dataType,defaultValue) {
+function convertDataToDataType(data,dataType,defaultValue,rowUpdation=false) {
       var safeValue = null;
       switch (dataType) {
             case 'Text' :
@@ -992,7 +992,9 @@ function convertDataToDataType(data,dataType,defaultValue) {
 
                   break;
             case 'DropDownList' :
-                  safeValue = data;
+              if(!rowUpdation)
+                  safeValue = defaultValue;
+              else safeValue = data;
             break;
             default :
                   safeValue = defaultValue;    
